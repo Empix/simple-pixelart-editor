@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Pixel</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="tools-wrapper">
+        <div class="left-bar bar">
+          <div class="tools">
+            <ul>
+              <li class="tool selected" data-content="Pen" data-shortcut="P">
+                <span class="material-icons-round"> edit </span>
+              </li>
+              <li class="tool" data-content="Eraser" data-shortcut="E">
+                <span class="material-icons-round"> stop </span>
+              </li>
+              <li class="tool" data-content="Color" data-shortcut="C">
+                <input type="color" value="#ffffff" />
+              </li>
+              <li class="tool" data-content="Reset position" data-shortcut="R">
+                <span class="material-icons-round"> aspect_ratio </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bottom-bar bar">
+          <div class="cursor-position">X: 0, Y: 0</div>
+        </div>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="draw-canvas"></canvas>
+        <canvas id="overlay-canvas"></canvas>
+        <canvas id="background-canvas"></canvas>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/tools.js"></script>
+    <script>
+      tippy(".tool", {
+        placement: "right",
+        allowHTML: true,
+        theme: "default",
+        arrow: false,
+        content(reference) {
+          const content = reference.getAttribute("data-content");
+          const shortcut = reference.getAttribute("data-shortcut");
+
+          return `${content} <span class='shortcut'>(${shortcut})</span>`;
+        },
+      });
+    </script>
+  </body>
+</html>
